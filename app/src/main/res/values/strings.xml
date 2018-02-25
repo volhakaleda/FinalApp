@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FinalApp</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="submit">submit</string>
+
 </resources>
