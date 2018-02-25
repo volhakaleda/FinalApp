@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     String savedUsername = sharedPreferences.getString(USERNAME_KEY, "");
     String savedPassword = sharedPreferences.getString(PASSWORD_KEY, "");
 
-    if(!TextUtils.isEmpty(savedUsername) && !TextUtils.isEmpty(savedPassword)) {
+    if(!TextUtils.isEmpty(savedUsername)) {
       Intent intent = new Intent(LoginActivity.this, BreedsActivity.class);
       startActivity(intent);
     }
