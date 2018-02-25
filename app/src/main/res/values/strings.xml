@@ -3,5 +3,7 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="submit">submit</string>
+    <string name="greeting">What kind of dog would you like to see, "</string>
+    <string name="question_mark">"?"</string>
 
 </resources>

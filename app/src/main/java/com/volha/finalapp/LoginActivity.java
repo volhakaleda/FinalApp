@@ -16,8 +16,8 @@ public class LoginActivity extends AppCompatActivity {
   private EditText password;
   private Button submit;
 
-  private final static String SHARED_PREFS_KEY = "dogSharedPRefs";
-  private final static String USERNAME_KEY = "usernameKey";
+  final static String SHARED_PREFS_KEY = "dogSharedPRefs";
+  final static String USERNAME_KEY = "usernameKey";
   private final static String PASSWORD_KEY = "passwordKey";
 
 
@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
           SharedPreferences.Editor editor = sharedPreferences.edit();
           editor.putString(USERNAME_KEY, usernameInput);
           editor.putString(PASSWORD_KEY, passwordInput);
+          editor.apply();
           Intent intent = new Intent(LoginActivity.this, BreedsActivity.class);
           startActivity(intent);
         }
