@@ -9,4 +9,5 @@
     <string name="spaniel">"spaniel"</string>
     <string name="retriever">"retriever"</string>
     <string name="poodle">"poodle"</string>
+    <string name="logout">"logout"</string>
 </resources>

@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".BreedsActivity">
         </activity>
+        <activity android:name=".DogsActivity">
+        </activity>
     </application>
 
 </manifest>

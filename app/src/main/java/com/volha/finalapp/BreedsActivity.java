@@ -4,7 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
@@ -14,13 +19,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BreedsActivity extends AppCompatActivity {
+public class BreedsActivity extends AppCompatActivity implements View.OnClickListener{
 
+  static final String BREED_KEY = "breedKey";
   private static String[] BREEDS = {"terrier", "spaniel", "retriever", "poodle"};
   private ImageView terrierIV;
   private ImageView spanielIV;
   private ImageView retrieverIV;
   private ImageView poodleIV;
+
+  private SharedPreferences sharedPreferences;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +41,16 @@ public class BreedsActivity extends AppCompatActivity {
     retrieverIV = findViewById(R.id.retriever);
     poodleIV = findViewById(R.id.poodle);
 
-    final SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SHARED_PREFS_KEY, MODE_PRIVATE);
+    CardView terrierCard = findViewById(R.id.terrier_card);
+    CardView spanielCard = findViewById(R.id.spaniel_card);
+    CardView retrieverCard = findViewById(R.id.retriever_card);
+    CardView poodleCard = findViewById(R.id.poodle_card);
+    terrierCard.setOnClickListener(this);
+    spanielCard.setOnClickListener(this);
+    retrieverCard.setOnClickListener(this);
+    poodleCard.setOnClickListener(this);
+
+    sharedPreferences = getSharedPreferences(LoginActivity.SHARED_PREFS_KEY, MODE_PRIVATE);
     String savedUsername = sharedPreferences.getString(LoginActivity.USERNAME_KEY, "");
 
     if(TextUtils.isEmpty(savedUsername)) {
@@ -80,6 +97,49 @@ public class BreedsActivity extends AppCompatActivity {
           t.getMessage();
         }
       });
+    }
+  }
+
+  @Override
+  public void onClick(View v) {
+    String breed = "";
+    switch (v.getId()) {
+      case R.id.terrier_card:
+        breed = "terrier";
+        break;
+      case R.id.spaniel_card:
+        breed = "spaniel";
+        break;
+      case R.id.retriever_card:
+        breed = "retriever";
+        break;
+      case R.id.poodle_card:
+        breed = "poodle";
+        break;
+    }
+
+    Intent intent = new Intent(this, DogsActivity.class);
+    intent.putExtra(BREED_KEY, breed);
+    startActivity(intent);
+  }
+
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.menu, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.logout:
+        sharedPreferences.edit().remove(LoginActivity.USERNAME_KEY).apply();
+        finish();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
     }
   }
 }
