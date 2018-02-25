@@ -1,5 +1,7 @@
 package com.volha.finalapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
 
+  static final String URL_KEY = "url";
   List<String> images = new ArrayList<>();
 
   @Override
@@ -20,9 +23,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
   }
 
   @Override
-  public void onBindViewHolder(ImageAdapter.ViewHolder holder, int position) {
-    String url = images.get(position);
+  public void onBindViewHolder(final ImageAdapter.ViewHolder holder, int position) {
+    final String url = images.get(position);
     Picasso.with(holder.imageView.getContext()).load(url).into(holder.imageView);
+    holder.imageView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Context context = holder.imageView.getContext();
+        Intent intent = new Intent(context, PhotoActivity.class);
+        intent.putExtra(URL_KEY, url);
+        context.startActivity(intent);
+      }
+    });
   }
 
   @Override
