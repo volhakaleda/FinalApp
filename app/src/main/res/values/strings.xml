@@ -5,5 +5,8 @@
     <string name="submit">submit</string>
     <string name="greeting">What kind of dog would you like to see, "</string>
     <string name="question_mark">"?"</string>
-
+    <string name="terrier">"terrier"</string>
+    <string name="spaniel">"spaniel"</string>
+    <string name="retriever">"retriever"</string>
+    <string name="poodle">"poodle"</string>
 </resources>
